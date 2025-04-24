@@ -1,9 +1,32 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
+  private apiUrl = 'http://localhost:3000/posts'; // JSON Server URL for posts
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
+
+  getPosts(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  getPost(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  addPost(post: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, post);
+  }
+
+  updatePost(id: string, post: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, post);
+  }
+
+  deletePost(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
 }
