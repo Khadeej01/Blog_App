@@ -1,57 +1,28 @@
-import { APP_BASE_HREF } from '@angular/common';
-import { CommonEngine } from '@angular/ssr';
-import express from 'express';
-import { fileURLToPath } from 'node:url';
-import { dirname, join, resolve } from 'node:path';
-import bootstrap from './src/main.server';
+import * as jsonServer from 'json-server';
+import { Request, Response } from 'express';
 
-// The Express app is exported so that it can be used by serverless Functions.
-export function app(): express.Express {
-  const server = express();
-  const serverDistFolder = dirname(fileURLToPath(import.meta.url));
-  const browserDistFolder = resolve(serverDistFolder, '../browser');
-  const indexHtml = join(serverDistFolder, 'index.server.html');
+const server = jsonServer.create();
+const router = jsonServer.router('db.json');
+const middlewares = jsonServer.defaults();
 
-  const commonEngine = new CommonEngine();
+server.use(middlewares);
+server.use(jsonServer.bodyParser);
 
-  server.set('view engine', 'html');
-  server.set('views', browserDistFolder);
+server.post('/login', (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  console.log('Login request:', { email, password }); // Debug log
+  const users = router.db.get('users').value();
+  const user = users.find((u: any) => u.email === email && u.password === password);
 
-  // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { });
-  // Serve static files from /browser
-  server.get('**', express.static(browserDistFolder, {
-    maxAge: '1y',
-    index: 'index.html',
-  }));
+  if (user) {
+    const token = `fake-jwt-${user.id}-${Date.now()}`;
+    res.json({ token, user: { id: user.id, email: user.email, username: user.username } });
+  } else {
+    res.status(401).json({ error: 'Invalid email or password' });
+  }
+});
 
-  // All regular routes use the Angular engine
-  server.get('**', (req, res, next) => {
-    const { protocol, originalUrl, baseUrl, headers } = req;
-
-    commonEngine
-      .render({
-        bootstrap,
-        documentFilePath: indexHtml,
-        url: `${protocol}://${headers.host}${originalUrl}`,
-        publicPath: browserDistFolder,
-        providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
-      })
-      .then((html) => res.send(html))
-      .catch((err) => next(err));
-  });
-
-  return server;
-}
-
-function run(): void {
-  const port = process.env['PORT'] || 4000;
-
-  // Start up the Node server
-  const server = app();
-  server.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
-  });
-}
-
-run();
+server.use(router);
+server.listen(3000, () => {
+  console.log('JSON Server is running on http://localhost:3000');
+});
