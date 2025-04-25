@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { NgIf } from '@angular/common';  
 
 import { PostService } from '../../../core/services/post.service';
@@ -7,7 +8,7 @@ import { PostService } from '../../../core/services/post.service';
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.scss']
 })
