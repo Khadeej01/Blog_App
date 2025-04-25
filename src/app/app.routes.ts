@@ -5,7 +5,7 @@ import { PostDetailComponent } from './features/posts/post-detail/post-detail.co
 import { PostFormComponent } from './features/posts/post-form/post-form.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AuthGuard } from './core/guards/auth.guard';
+import { authGuard } from './core/guards/auth.guard';
 import { NavbarComponent } from './features/navbar/navbar.component';
 
 export const routes: Routes = [
@@ -13,9 +13,10 @@ export const routes: Routes = [
   { path: '', component : NavbarComponent},
   { path: 'posts', component: PostListComponent },
   { path: 'post/:id', component: PostDetailComponent },
-  { path: 'post-form', component: PostFormComponent, canActivate: [AuthGuard] },
+  { path: 'post-form', component: PostFormComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+  { path: 'posts/new', component: PostFormComponent },
   { path: '**', redirectTo: '' }
 ];
 

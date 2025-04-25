@@ -1,9 +1,26 @@
 {
-    "users": [
-      { "id": 1, "email": "user@example.com", "password": "password123" }
-    ],
-    "posts": [
-      { "id": 1, "title": "First Post", "content": "Content of the first post" },
-      { "id": 2, "title": "Second Post", "content": "Content of the second post" }
-    ]
-  }
+  "users": [
+    {
+      "id": "1",
+      "email": "user@example.com",
+      "password": "password123"
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "First Post",
+      "content": "Content of the first post"
+    },
+    {
+      "id": "2",
+      "title": "Second Post",
+      "content": "Content of the second post"
+    },
+    {
+      "id": "5f73",
+      "title": "vcch",
+      "content": "jbbhbhh"
+    }
+  ]
+}

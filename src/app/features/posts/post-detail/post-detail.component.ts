@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NgIf } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { NgIf } from '@angular/common';  
+
 import { PostService } from '../../../core/services/post.service';
 
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [NgIf],
+  imports: [],
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.scss']
 })
@@ -17,8 +19,8 @@ export class PostDetailComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.postService.getPost(id).subscribe(post => {
-        this.post = post;
+      this.postService.getPosts().subscribe(posts => {
+        this.post = posts.find(post => this.post.id===+id);
       });
     }
   }
