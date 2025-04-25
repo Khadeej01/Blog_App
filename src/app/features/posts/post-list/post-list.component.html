@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+<!-- <div class="container mt-5">
+=======
 <div class="container mt-5">
+>>>>>>> 7ceb13984cbb0986a82266def421481d595b8763
     <h2>Liste des Articles</h2>
     <div *ngIf="posts.length === 0">Aucun article disponible.</div>
     <ul class="list-group">
@@ -6,4 +10,25 @@
         <a [routerLink]="['/post', post.id]">{{ post.title }}</a>
       </li>
     </ul>
+<<<<<<< HEAD
+  </div> -->
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Post List</h2>
+    <div class="list-group">
+      <div class="list-group-post" *ngFor="let post of posts">
+        <div class="d-flex justify-content-between align-items-center">
+          <span>{{ post.name }}</span>
+          <div>
+            <button class="btn btn-primary btn-sm me-2" [routerLink]="['/edit', post.id]">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deletePost(post.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <button class="btn btn-success" [routerLink]="['/add']">Add New Post</button>
+    </div>
+=======
+>>>>>>> 7ceb13984cbb0986a82266def421481d595b8763
   </div>

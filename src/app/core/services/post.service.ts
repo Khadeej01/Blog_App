@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PostService {
-  private apiUrl = 'http://localhost:3000/posts'; // JSON Server URL for posts
+  private apiUrl = 'http://localhost:3000/posts'; 
 
   constructor(private http: HttpClient) {}
 
