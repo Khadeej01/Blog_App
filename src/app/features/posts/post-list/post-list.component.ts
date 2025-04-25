@@ -23,9 +23,15 @@ export class PostListComponent implements OnInit {
     });
   }
 
-  // deletePost(id : number): void{
-  //   this.postService.deletePost(id).subscribe(()=>{
-  //     this.posts = this.posts.filter(post => post.id !== id );
-  //   });
-  // }
+
+  onDelete(id: number): void {
+    if (confirm("Es-tu sûr de vouloir supprimer cet article ?")) {
+      this.postService.deletePost(id).subscribe(() => {
+        this.posts = this.posts.filter(post => post.id !== id);
+      });
+    }
+  }
+  
+
+
 }
