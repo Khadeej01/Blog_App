@@ -1,1 +1,27 @@
-<p>post-list works!</p>
+<!-- <div class="container mt-5">
+    <h2>Liste des Articles</h2>
+    <div *ngIf="posts.length === 0">Aucun article disponible.</div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let post of posts">
+        <a [routerLink]="['/post', post.id]">{{ post.title }}</a>
+      </li>
+    </ul>
+  </div> -->
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Post List</h2>
+    <div class="list-group">
+      <div class="list-group-post" *ngFor="let post of posts">
+        <div class="d-flex justify-content-between align-items-center">
+          <span>{{ post.name }}</span>
+          <div>
+            <button class="btn btn-primary btn-sm me-2" [routerLink]="['/edit', post.id]">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deletePost(post.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <button class="btn btn-success" [routerLink]="['/add']">Add New Post</button>
+    </div>
+  </div>
