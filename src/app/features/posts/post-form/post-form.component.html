@@ -1,4 +1,16 @@
-<div class="container mt-5">
-    <h2>Ajouter/Modifier un Article</h2>
-    <p>Placeholder for post form.</p>
-  </div>
+<div class="container mt-4">
+  <h2>Créer un post</h2>
+  <form (ngSubmit)="createPost()">
+    <div class="mb-3">
+      <label>Titre</label>
+      <input [(ngModel)]="title" name="title" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Contenu</label>
+      <textarea [(ngModel)]="content" name="content" class="form-control" rows="6" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Publier</button>
+  </form>
+</div>

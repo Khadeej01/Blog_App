@@ -1,19 +1,26 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "email": "user@example.com",
-        "password": "password123",
-        "username": "testuser"
-      }
-    ],
-<<<<<<< HEAD
-    "posts": [
-      { "id": 1, "title": "First Post", "content": "Content of the first post" },
-      { "id": 2, "title": "Second Post", "content": "Content of the second post" }
-    ]
-    
-=======
-    "posts": []
->>>>>>> b8da475b8822cbf72a5e553fbdd031571eb2c42d
-  }
+  "users": [
+    {
+      "id": "1",
+      "email": "user@example.com",
+      "password": "password123"
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "First Post",
+      "content": "Content of the first post"
+    },
+    {
+      "id": "2",
+      "title": "Second Post",
+      "content": "Content of the second post"
+    },
+    {
+      "id": "5f73",
+      "title": "vcch",
+      "content": "jbbhbhh"
+    }
+  ]
+}

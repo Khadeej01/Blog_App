@@ -1,13 +1,12 @@
 <div class="container mt-5">
-    <h2>Détail de l'Article</h2>
-    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-      {{ errorMessage }}
-    </div>
-    <div *ngIf="!errorMessage && post; else noPost">
-      <h3>{{ post.title }}</h3>
-      <p>{{ post.content }}</p>
-    </div>
-    <ng-template #noPost>
-      <p>Article non trouvé.</p>
-    </ng-template>
+  <h2>Détail de l'Article</h2>
+  <!-- Vérifie si 'post' existe, sinon affiche 'Article non trouvé' -->
+  <div *ngIf="post; else noPost">
+    <h3>{{ post.title }}</h3> <!-- Affiche le titre du post -->
+    <p>{{ post.content }}</p> <!-- Affiche le contenu du post -->
   </div>
+  <!-- Bloc qui sera affiché si 'post' est null ou undefined -->
+  <ng-template #noPost>
+    <p>Article non trouvé.</p>
+  </ng-template>
+</div>
