@@ -24,7 +24,7 @@ export class PostFormComponent implements OnInit{
     private route : ActivatedRoute,
     private router : Router,
   ){}
-
+// HYDHDHDH
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id')!;   //récupère les paramètres de l'URL actuelle et 	extrait la valeur de id le + 	convertit de chaîne à nombre
     if(this.id){
