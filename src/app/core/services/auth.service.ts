@@ -1,38 +1,61 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
+interface User {
+  id: number;
+  email: string;
+  username: string;
+}
+
+interface LoginResponse {
+  token: string;
+  user: User;
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private authStatusSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
-  authStatus = this.authStatusSubject.asObservable();
-  private apiUrl = 'http://localhost:3000'; // JSON Server base URL
+  private apiUrl = 'http://localhost:3000/login';
+  private token: string | null = null;
+  private user: User | null = null;
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
-  }
-
-  login(credentials: { email: string; password: string }): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/users?email=${credentials.email}&password=${credentials.password}`)
-      .pipe(
-        tap(users => {
-          if (users.length > 0) {
-            localStorage.setItem('token', 'fake-jwt-token');
-            this.authStatusSubject.next(true);
-          } else {
-            throw new Error('Invalid credentials');
-          }
-        })
-      );
+  login(email: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(this.apiUrl, { email, password }).pipe(
+      tap(response => {
+        this.token = response.token;
+        this.user = response.user;
+        this.isAuthenticatedSubject.next(true);
+      }),
+      catchError(error => {
+        console.error('Login error:', error);
+        return throwError(() => new Error(error.error?.error || 'Login failed'));
+      })
+    );
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    this.authStatusSubject.next(false);
+    this.token = null;
+    this.user = null;
+    this.isAuthenticatedSubject.next(false);
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.token;
+  }
+
+  getToken(): string | null {
+    return this.token;
+  }
+
+  getUser(): User | null {
+    return this.user;
   }
 }

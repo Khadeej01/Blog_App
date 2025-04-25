@@ -1,31 +1,33 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // For ngModel
-import { NgIf } from '@angular/common'; // Correct import for NgIf
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  credentials = { email: '', password: '' };
-  errorMessage: string | null = null;
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  login(): void {
-    this.errorMessage = null;
-    this.authService.login(this.credentials).subscribe({
+  onSubmit(): void {
+    this.errorMessage = '';
+    this.authService.login(this.email, this.password).subscribe({
       next: () => {
         this.router.navigate(['/dashboard']);
       },
-      error: (err) => {
-        this.errorMessage = 'Échec de la connexion : ' + (err.message || 'Erreur inconnue');
-      }
+      error: (err: Error) => {
+        this.errorMessage = err.message || 'Invalid email or password';
+      },
     });
   }
 }
