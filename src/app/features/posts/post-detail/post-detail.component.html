@@ -1,6 +1,9 @@
 <div class="container mt-5">
     <h2>Détail de l'Article</h2>
-    <div *ngIf="post; else noPost">
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="!errorMessage && post; else noPost">
       <h3>{{ post.title }}</h3>
       <p>{{ post.content }}</p>
     </div>

@@ -1,9 +1,11 @@
 {
     "users": [
-      { "id": 1, "email": "user@example.com", "password": "password123" }
+      {
+        "id": 1,
+        "email": "user@example.com",
+        "password": "password123",
+        "username": "testuser"
+      }
     ],
-    "posts": [
-      { "id": 1, "title": "First Post", "content": "Content of the first post" },
-      { "id": 2, "title": "Second Post", "content": "Content of the second post" }
-    ]
+    "posts": []
   }
