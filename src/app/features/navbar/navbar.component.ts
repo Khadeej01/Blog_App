@@ -1,30 +1,29 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router'; // Import RouterModule for routing
-import { AuthService } from '../../core/services/auth.service'; // Import AuthService
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service'; // Adjust path if needed
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true, // This makes the component standalone
-  imports: [CommonModule, RouterModule], // Import CommonModule and RouterModule
+  standalone: true,
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  isMenuOpen = false;
-  isAuthenticated = false;
+  isMenuOpen: boolean = false;
+  isAuthenticated$: Observable<boolean>;
 
   constructor(private authService: AuthService) {
-    this.authService.authStatus.subscribe(status => {
-      this.isAuthenticated = status;
-    });
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
   }
 
-  toggleMenu() {
+  toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
   }
 }
