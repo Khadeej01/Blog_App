@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    //GHHHH
     provideRouter(routes),
     provideHttpClient(withFetch()),
     FormsModule,
