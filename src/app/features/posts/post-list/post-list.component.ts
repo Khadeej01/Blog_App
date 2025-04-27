@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
+import { Post } from '../../../core/services/post.service';
 import { PostService } from '../../../core/services/post.service';
 
 @Component({
@@ -17,13 +18,20 @@ export class PostListComponent implements OnInit {
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    this.postService.getPosts().subscribe({
-      next: (posts) => {
-        this.posts = posts;
-      },
-      error: (err) => {
-        this.errorMessage = 'Erreur lors du chargement des articles : ' + (err.message || 'Erreur inconnue');
-      }
+    this.postService.getPosts().subscribe((data)=>{
+      this.posts = data;
     });
   }
+
+
+  onDelete(id: number): void {
+    if (confirm("Es-tu sûr de vouloir supprimer cet article ?")) {
+      this.postService.deletePost(id).subscribe(() => {
+        this.posts = this.posts.filter(post => post.id !== id);
+      });
+    }
+  }
+  
+
+
 }

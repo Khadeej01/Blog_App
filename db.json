@@ -1,11 +1,41 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "email": "user@example.com",
-        "password": "password123",
-        "username": "testuser"
-      }
-    ],
-    "posts": []
-  }
+  "users": [
+    {
+      "id": "1",
+      "email": "user@example.com",
+      "password": "password123"
+    }
+  ],
+  "posts": [
+    {
+      "id": "2",
+      "title": "Second Post",
+      "content": "Content of the second post"
+    },
+    {
+      "id": "07c7",
+      "title": "Eos qui itaque asper",
+      "content": "Aspernatur vitae omn"
+    },
+    {
+      "id": "95f4",
+      "title": "Dicta aliqua Sunt c",
+      "content": "Distinctio Minus do"
+    },
+    {
+      "id": "20d5",
+      "title": "Alias voluptas quos ",
+      "content": "Nisi voluptates tene"
+    },
+    {
+      "id": "8eb8",
+      "title": "Dolor itaque incidid",
+      "content": " Aut ad ut ea aut lor Aut ad ut ea aut lor Aut ad ut ea aut lor Aut ad ut ea aut lor Aut ad ut ea aut lor Aut ad ut ea aut lor"
+    },
+    {
+      "id": "8114",
+      "title": "jinijinhufhhh",
+      "content": "uinnnhjjh k,kk"
+    }
+  ]
+}
