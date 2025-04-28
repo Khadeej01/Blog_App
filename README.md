@@ -1,28 +1,47 @@
 # Blog_App
 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.19.
+BlogApp est une application web construite avec Angular 18 et Bootstrap 5. Elle permet de :
 
-## Development server
+-Consulter la liste des articles
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+-Voir le détail d'un article
 
-## Code scaffolding
+-Ajouter, modifier et supprimer des articles
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+-Se connecter pour accéder aux fonctionnalités protégées
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Fonctionnalités principales
+Articles :
 
-## Running unit tests
+Liste des articles
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Détail d'un article
 
-## Running end-to-end tests
+Création, édition, suppression (après authentification)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Authentification :
 
-## Further help
+Formulaire de connexion
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Gestion des accès par AuthGuard
+
+Token stocké en local (localStorage)
+
+Formulaires :
+
+Validations des champs via Reactive Forms
+
+Design responsive avec Bootstrap
+
+Technologies utilisées
+Angular 18
+
+Bootstrap 5
+
+RxJS
+
+TypeScript
+
+
